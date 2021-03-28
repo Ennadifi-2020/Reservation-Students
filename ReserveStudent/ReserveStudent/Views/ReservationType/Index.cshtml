@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ReserveStudent.Models.ReservationType>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">ReservationType</h1>
+
+<p>
+    <a class="btn btn-primary mr-2" asp-action="Create">Create New</a>
+</p>
+<table class="table table-striped table-dark">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                <a class="btn btn-info mr-2" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure to delete this type')">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
