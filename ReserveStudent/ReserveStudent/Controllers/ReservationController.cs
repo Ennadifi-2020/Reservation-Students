@@ -14,29 +14,29 @@ namespace ReserveStudent.Controllers
 {
     public class ReservationController : Controller
     {
-        private readonly IReservationRepository _reservationRepo;
-        private readonly IReservationTypeRepository _reservationTypeRepo;
+        private readonly IReservationRepository _reservatrepo;
+        private readonly IReservationTypeRepository _reservatTypeRepo;
         private readonly UserManager<IdentityUser> _userManager;
         public ReservationController(IReservationRepository reservationRepo, IReservationTypeRepository reservationTypeRepo, UserManager<IdentityUser> userManager)
         {
-            _reservationRepo = reservationRepo;
-            _reservationTypeRepo = reservationTypeRepo;
+            _reservatrepo = reservationRepo;
+            _reservatTypeRepo = reservationTypeRepo;
             _userManager = userManager;
         }
         [Authorize]
         // GET: ReservationController
         public async Task<ActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var userr = await _userManager.GetUserAsync(User);
 
             if (User.IsInRole("Admin"))
             {
-                var reservation = _reservationRepo.GetAll().OrderBy(x => x.RequestingStudent.Count);
+                var reservation = _reservatrepo.GetAll().OrderBy(x => x.RequestingStudent.Count);
                 return View(reservation);
             }
             else
             {
-                var reservation = _reservationRepo.GetAll().Where(r => r.RequestingStudentId == user.Id);
+                var reservation = _reservatrepo.GetAll().Where(r => r.RequestingStudentId == userr.Id);
                 return View(reservation);
 
             }
@@ -47,7 +47,7 @@ namespace ReserveStudent.Controllers
         // GET: ReservationController/Details/5
         public ActionResult Review(int id)
         {
-            var reservation = _reservationRepo.GetById(id);
+            var reservation = _reservatrepo.GetById(id);
             return View(reservation);
         }
 
@@ -56,10 +56,10 @@ namespace ReserveStudent.Controllers
             try
             {
                 var user = _userManager.GetUserAsync(User).Result;
-                var reservation = _reservationRepo.GetById(id);
+                var reservation = _reservatrepo.GetById(id);
                 reservation.Status = true;
                 reservation.RequestingStudent.Count ++ ;
-                _reservationRepo.Update(reservation);
+                _reservatrepo.Update(reservation);
                 return RedirectToAction("Index");
 
             }
@@ -74,10 +74,10 @@ namespace ReserveStudent.Controllers
         {
             try
             {
-                var user = _userManager.GetUserAsync(User).Result;
-                var reservation = _reservationRepo.GetById(id);
-                reservation.Status = false;
-                _reservationRepo.Update(reservation);
+                
+                var reserv = _reservatrepo.GetById(id);
+                reserv.Status = false;
+                _reservatrepo.Update(reserv);
                 return RedirectToAction("Index");
 
             }
@@ -88,11 +88,11 @@ namespace ReserveStudent.Controllers
             }
         }
 
-        // GET: ReservationController/Create
+        
             public ActionResult Create()
         {
 
-            var reservationTypes = _reservationTypeRepo.GetAll();
+            var reservationTypes = _reservatTypeRepo.GetAll();
             var absenceTypesItems = reservationTypes.Select(x => new SelectListItem
             {
                 Text = x.Name,
@@ -105,7 +105,7 @@ namespace ReserveStudent.Controllers
             return View(model);
         }
 
-        // POST: ReservationController/Create
+        // POST: Creation du nouveau reservation
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateReservation model)
@@ -114,7 +114,7 @@ namespace ReserveStudent.Controllers
             {
                 var Date = Convert.ToDateTime(model.Date);
                 
-                var reservationTypes = _reservationTypeRepo.GetAll().ToList();
+                var reservationTypes = _reservatTypeRepo.GetAll().ToList();
                 var reservationTypesItems = reservationTypes.Select(x => new SelectListItem
                 {
                     Text = x.Name,
@@ -137,7 +137,7 @@ namespace ReserveStudent.Controllers
                     ReservationTypeId=model.ReservationTypeId
 
                 };
-                var isSuccuss = _reservationRepo.Create(reservation);
+                var isSuccuss = _reservatrepo.Create(reservation);
                 if (!isSuccuss)
                 {
                     ModelState.AddModelError("", "Something went wrong in the submit action");
