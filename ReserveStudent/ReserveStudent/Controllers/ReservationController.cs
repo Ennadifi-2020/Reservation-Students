@@ -17,6 +17,8 @@ namespace ReserveStudent.Controllers
         private readonly IReservationRepository _reservatrepo;
         private readonly IReservationTypeRepository _reservatTypeRepo;
         private readonly UserManager<IdentityUser> _userManager;
+
+        //constructeur initialisation
         public ReservationController(IReservationRepository reservationRepo, IReservationTypeRepository reservationTypeRepo, UserManager<IdentityUser> userManager)
         {
             _reservatrepo = reservationRepo;
@@ -25,6 +27,7 @@ namespace ReserveStudent.Controllers
         }
         [Authorize]
         // GET: ReservationController
+        //afficher user
         public async Task<ActionResult> Index()
         {
             var userr = await _userManager.GetUserAsync(User);
@@ -88,7 +91,7 @@ namespace ReserveStudent.Controllers
             }
         }
 
-        
+        //create Reservation
             public ActionResult Create()
         {
 
@@ -151,13 +154,13 @@ namespace ReserveStudent.Controllers
             }
         }
 
-        // GET: ReservationController/Edit/5
+        // GET: ReservationController/Edit/
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: ReservationController/Edit/5
+        // POST: ReservationController/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -172,14 +175,14 @@ namespace ReserveStudent.Controllers
             }
         }
 
-        // GET: ReservationController/Delete/5
+        // GET: ReservationController/Delete/
         public ActionResult Delete(int id)
         {
 
             return View();
         }
 
-        // POST: ReservationController/Delete/5
+        // POST: ReservationController/Delete/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

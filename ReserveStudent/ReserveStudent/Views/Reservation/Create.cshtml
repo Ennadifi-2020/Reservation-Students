@@ -7,30 +7,38 @@
 
 <h4 class="text-center">CreateReservation</h4>
 <hr />
-<div class="row">
+<div class="row d-flex justify-content-center">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ReservationTypeId" class="control-label"></label>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Type Reservation</label>
+                </div>
                 <select asp-for="ReservationTypeId" asp-items="Model.ReservationTypes"></select>
-                <span asp-validation-for="ReservationTypeId" class=""></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" type="date" class="form-control"  value="@DateTime.Now" />
-                <span asp-validation-for="Date" class="text-danger"></span>
+
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Date</label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <input asp-for="Date" type="date" class="form-control" value="@DateTime.Now" />
+        </div>
+
+        <div class="form-group d-flex">
+            @*<button class="btn btn-secondary m-2">Create</button>*@
+            @*<button class="btn btn-secondary" asp-action="Index">Back to List</button>*@
+            
+            <button class="btn btn-secondary my-3 mr-3">Create</button>
+            <a class="btn btn-secondary m-3" asp-controller="Reservation" asp-action="Index">Back to List</a>
+        </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a class="btn btn-primary" asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
