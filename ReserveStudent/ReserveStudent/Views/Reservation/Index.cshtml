@@ -9,11 +9,15 @@
 @if (User.IsInRole("Admin"))
 {
 }
-else
+else if(User.IsInRole("student"))
 {
     <p>
         <a class="btn btn-secondary mr-2" asp-action="Create">Create New</a>
     </p>
+}
+else
+{
+
 }
 
 <table id="myTable" class="table table-striped table-hover table-condensed">

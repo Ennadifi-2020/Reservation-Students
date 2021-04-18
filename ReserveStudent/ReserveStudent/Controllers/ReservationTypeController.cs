@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ReserveStudent.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ReserveStudent.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class ReservationTypeController : Controller
     {
         private readonly IReservationTypeRepository _repo;

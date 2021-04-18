@@ -24,26 +24,32 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
+
                         @*                        <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>*@
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Index">Reservation</a>
-                        </li>
-                        @if (User.IsInRole("Admin"))
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>*@
+                        @if (User.IsInRole("student")|| (User.IsInRole("Admin")))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ReservationType" asp-action="Index">ReservationType</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="UserRoleManagement" asp-action="Index">RoleManagement</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Index">Reservation</a>
                             </li>
                         }
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ReservationType" asp-action="Index">Type de Reservation</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="UserRoleManagement" asp-action="Index">Gestion des Rôles</a>
+                                </li>
+                            }
 
-                    </ul>
+                        </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>

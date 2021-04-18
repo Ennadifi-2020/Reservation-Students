@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace ReserveStudent.Controllers
 {
-  
+    [Authorize(Roles = "Admin")]
+
     public class UserRoleManagementController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
