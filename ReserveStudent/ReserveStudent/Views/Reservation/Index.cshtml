@@ -47,7 +47,9 @@ else
             </th>
             @if (User.IsInRole("Admin")) {
                 <th>Review</th>
+
             }
+           
         </tr>
     </thead>
     <tbody>
@@ -98,7 +100,13 @@ else
             {
 
             }
+        @*<td>
 
+            <a  class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <a  class="btn btn-warning" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+        </td>
+*@
         </tr>
         }
     </tbody>

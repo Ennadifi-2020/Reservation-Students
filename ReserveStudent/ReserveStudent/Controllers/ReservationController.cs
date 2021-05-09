@@ -95,7 +95,7 @@ namespace ReserveStudent.Controllers
             public ActionResult Create()
         {
 
-            var reservationTypes = _reservatTypeRepo.GetAll();
+            var reservationTypes = _reservatTypeRepo.GetAll(); 
             var absenceTypesItems = reservationTypes.Select(x => new SelectListItem
             {
                 Text = x.Name,
